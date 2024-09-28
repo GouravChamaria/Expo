@@ -108,15 +108,19 @@ const VisitorForm = () => {
     if (validate()) {
       axios
         .post("https://expo-server-rho.vercel.app/api/visitors", visitor)
-        .then(() => {
+        .then((response) => {
           generatePDF(visitor);
           setErrors({}); // Clear any existing errors
+          console.log("Visitor added:", response.data); // Debugging
         })
         .catch((err) => {
           if (err.response && err.response.status === 400) {
-            setErrors({ mobile: "Mobile number already exists. Please enter different number" });
+            setErrors({
+              mobile:
+                "Mobile number already exists. Please enter a different number",
+            });
           } else {
-            console.error(err);
+            console.error("Error submitting visitor:", err);
           }
         });
     }

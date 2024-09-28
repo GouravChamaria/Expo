@@ -10,16 +10,16 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 
 // Middleware
-// Handle preflight OPTIONS requests
-app.options('*', cors(corsOptions));
 
+// CORS Middleware Setup
 const corsOptions = {
-    origin: 'https://expo-client-chi.vercel.app', // Allow only your client origin
+    origin: 'https://expo-client-chi.vercel.app', // Adjust as needed for your client origin
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Allow cookies if needed
     optionsSuccessStatus: 204
-};
-
+  };
+  
+  app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 // Routes
