@@ -10,7 +10,7 @@ const VisitorList = () => {
 
   const selectWinner = () => {
     axios
-      .get("https://expo-server-rho.vercel.app/")
+      .get("https://expo-server-rho.vercel.app")
       .then((response) => {
         const visitors = response.data.filter((v) => !v.isWinner);
         const randomIndex = Math.floor(Math.random() * visitors.length);
