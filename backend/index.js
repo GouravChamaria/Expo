@@ -10,12 +10,12 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 
 // Middleware
-app.use(cors({
-    origin: 'https://expo-client-chi.vercel.app/',
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type'],
-    credentials: true,
-}));
+const corsOptions = {
+    origin: 'https://expo-client-chi.vercel.app', // Allow only your client origin
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Allow cookies if needed
+    optionsSuccessStatus: 204
+};
 
 app.use(bodyParser.json());
 
