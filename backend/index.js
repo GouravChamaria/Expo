@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5001;
 
 // Middleware
 const corsOptions = {
-    origin: 'https://expo-client-chi.vercel.app', // Allow only your client origin
+    origin: 'https://expo-client-chi.vercel.app/', // Allow only your client origin
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Allow cookies if needed
     optionsSuccessStatus: 204
