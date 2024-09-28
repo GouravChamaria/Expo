@@ -6,27 +6,32 @@ const bodyParser = require('body-parser');
 const visitorRoutes = require('./routes/visitorRoutes');
 const dotenv = require('dotenv');
 
+dotenv.config(); // Load environment variables from .env file
+
 const app = express();
 const PORT = process.env.PORT || 5001;
 
 // Middleware
-
-// CORS Middleware Setup
 const corsOptions = {
-    origin: 'https://expo-client-chi.vercel.app', // Adjust as needed for your client origin
+    origin: 'https://expo-client-chi.vercel.app', // Allow only your client origin
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Allow cookies if needed
     optionsSuccessStatus: 204
-  };
-  
-  app.use(cors(corsOptions));
+};
+
+// Use CORS middleware
+app.use(cors(corsOptions));
+
+// Handle preflight OPTIONS requests
+app.options('*', cors(corsOptions));
+
 app.use(bodyParser.json());
 
 // Routes
 app.use('/', visitorRoutes);
 
-
-mongoose.connect("mongodb+srv://GouravChamaria:1234@cluster0.wdagdjh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://GouravChamaria:1234@cluster0.wdagdjh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
@@ -40,3 +45,4 @@ mongoose.connect("mongodb+srv://GouravChamaria:1234@cluster0.wdagdjh.mongodb.net
 .catch((err) => {
     console.error('Failed to connect to MongoDB', err);
 });
+
