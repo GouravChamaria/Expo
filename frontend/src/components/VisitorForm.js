@@ -107,7 +107,7 @@ const VisitorForm = () => {
     e.preventDefault();
     if (validate()) {
       axios
-        .post("https://expo-server-rho.vercel.app/api/visitors", visitor)
+        .post("https://expo-server-rho.vercel.app/", visitor)
         .then((response) => {
           generatePDF(visitor);
           setErrors({}); // Clear any existing errors

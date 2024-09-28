@@ -23,7 +23,7 @@ const corsOptions = {
 app.use(bodyParser.json());
 
 // Routes
-app.use('/api/visitors', visitorRoutes);
+app.use('/', visitorRoutes);
 
 
 mongoose.connect("mongodb+srv://GouravChamaria:1234@cluster0.wdagdjh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
