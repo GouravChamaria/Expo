@@ -10,6 +10,7 @@ const getNextSerialNumber = async () => {
 };
 
 // Create a new visitor
+
 router.post("/", async (req, res) => {
   try {
     const existingVisitor = await Visitor.findOne({ mobile: req.body.mobile });
