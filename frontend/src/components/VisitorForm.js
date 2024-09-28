@@ -26,7 +26,7 @@ const VisitorForm = () => {
   useEffect(() => {
     if (id) {
       axios
-        .get(`http://expo-server-rho.vercel.app/${id}`)
+        .get(`https://expo-server-rho.vercel.app/${id}`)
         .then((response) => {
           const data = response.data;
           setVisitor({
@@ -107,7 +107,7 @@ const VisitorForm = () => {
     e.preventDefault();
     if (validate()) {
       axios
-        .post("http://expo-server-rho.vercel.app/api/visitors", visitor)
+        .post("https://expo-server-rho.vercel.app/api/visitors", visitor)
         .then(() => {
           generatePDF(visitor);
           setErrors({}); // Clear any existing errors

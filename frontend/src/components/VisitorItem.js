@@ -10,7 +10,7 @@ const VisitorItem = ({ visitor, onDelete, onUpdate }) => {
     const [showModal, setShowModal] = useState(false);
 
     const handleDelete = () => {
-        axios.delete(`http://expo-server-rho.vercel.app/api/visitors/${visitor._id}`)
+        axios.delete(`https://expo-server-rho.vercel.app/api/visitors/${visitor._id}`)
             .then(() => {
                 onDelete(visitor._id);
             })
@@ -18,27 +18,37 @@ const VisitorItem = ({ visitor, onDelete, onUpdate }) => {
     };
 
     const generatePDF = () => {
-        const doc = new jsPDF();
-
+        const doc = new jsPDF({
+            orientation: 'portrait',
+            unit: 'px',
+            format: 'a4',
+        });
+    
+        // Add the PDF template as an image (e.g., a background)
+        const imgData = '/Users/gouravchamaria/Downloads/template.jpg'; // Replace with the path to your template image
+        
+        doc.addImage(imgData, 'JPEG', 0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight()); // Adjust the dimensions as needed
+    
+        // Now overlay text on top of the template
         doc.setFontSize(18);
-        doc.text('Visitor Tag', 14, 22);
+        doc.text('Visitor Tag', 40, 60); // Adjust the positions based on your template
         doc.setFontSize(12);
-        doc.text(`Serial Number: ${visitor.serialNumber}`, 14, 32);
-        doc.text(`Name: ${visitor.name}`, 14, 40);
-        doc.text(`Father/Husband Name: ${visitor.fatherOrHusbandName}`, 14, 48);
-        doc.text(`House Number: ${visitor.houseNumber}`, 14, 56);
-        doc.text(`City: ${visitor.city}`, 14, 64);
-        doc.text(`State: ${visitor.state}`, 14, 72);
-        doc.text(`Mobile: ${visitor.mobile}`, 14, 80);
-        doc.text(`Age: ${visitor.age}`, 14, 88);
-        doc.text(`Business: ${visitor.business}`, 14, 96);
-        doc.text(`Gender: ${visitor.gender}`, 14, 104);
-        doc.text(`Education: ${visitor.education}`, 14, 112);
-        doc.text(`Date: ${new Date(visitor.date).toLocaleDateString()}`, 14, 120);
-
+        doc.text(`Serial Number: ${visitor.serialNumber}`, 40, 80);
+        doc.text(`Name: ${visitor.name}`, 40, 100);
+        doc.text(`Father/Husband Name: ${visitor.fatherOrHusbandName}`, 40, 120);
+        doc.text(`House Number: ${visitor.houseNumber}`, 40, 140);
+        doc.text(`City: ${visitor.city}`, 40, 160);
+        doc.text(`State: ${visitor.state}`, 40, 180);
+        doc.text(`Mobile: ${visitor.mobile}`, 40, 200);
+        doc.text(`Age: ${visitor.age}`, 40, 220);
+        doc.text(`Business: ${visitor.business}`, 40, 240);
+        doc.text(`Gender: ${visitor.gender}`, 40, 260);
+        doc.text(`Education: ${visitor.education}`, 40, 280);
+        doc.text(`Date: ${new Date(visitor.date).toLocaleDateString()}`, 40, 300);
+    
+        // Save the PDF
         doc.save(`Visitor_${visitor.serialNumber}.pdf`);
     };
-
     return (
         <tr>
             <td>{visitor.serialNumber}</td>
