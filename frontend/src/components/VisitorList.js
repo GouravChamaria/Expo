@@ -10,7 +10,7 @@ const VisitorList = () => {
 
   const selectWinner = () => {
     axios
-      .get("http://localhost:5001/api/visitors")
+      .get("http://expo-server-rho.vercel.app/api/visitors")
       .then((response) => {
         const visitors = response.data.filter((v) => !v.isWinner);
         const randomIndex = Math.floor(Math.random() * visitors.length);
@@ -18,7 +18,7 @@ const VisitorList = () => {
         setWinner(selectedWinner);
 
         // Mark the visitor as a winner
-        axios.put(`http://localhost:5001/api/visitors/${selectedWinner._id}`, {
+        axios.put(`http://expo-server-rho.vercel.app/api/visitors/${selectedWinner._id}`, {
           isWinner: true,
         });
       })
@@ -31,7 +31,7 @@ const VisitorList = () => {
 
   const fetchVisitors = () => {
     axios
-      .get("http://localhost:5001/api/visitors")
+      .get("http://expo-server-rho.vercel.app/api/visitors")
       .then((response) => setVisitors(response.data))
       .catch((err) => console.error(err));
   };

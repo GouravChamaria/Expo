@@ -10,7 +10,7 @@ const VisitorItem = ({ visitor, onDelete, onUpdate }) => {
     const [showModal, setShowModal] = useState(false);
 
     const handleDelete = () => {
-        axios.delete(`http://localhost:5001/api/visitors/${visitor._id}`)
+        axios.delete(`http://expo-server-rho.vercel.app/api/visitors/${visitor._id}`)
             .then(() => {
                 onDelete(visitor._id);
             })
