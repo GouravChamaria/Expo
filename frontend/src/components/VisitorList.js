@@ -31,7 +31,7 @@ const VisitorList = () => {
 
   const fetchVisitors = () => {
     axios
-      .get("https://expo-server-rho.vercel.app/")
+      .get("https://expo-server-rho.vercel.app")
       .then((response) => setVisitors(response.data))
       .catch((err) => console.error(err));
   };
